@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CONUS Compound Drought-Heatwave Monitor</title>
+  <meta name="description" content="Interactive viewer for CONUS compound drought-heatwave NetCDF data.">
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="site-header-inner">
+      <div>
+        <span class="eyebrow">Climate Atlas</span>
+        <h1>CONUS CDHW Monitor</h1>
+        <p>Weekly compound drought and heatwave severity from 1982-2020</p>
+      </div>
+      <div class="header-status" aria-label="Dataset status">
+        <span>Topographic</span>
+        <span>Weekly</span>
+        <span>2° grid</span>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="page-shell">
+    <section class="control-bar" aria-label="Map controls">
+      <div class="control-title">
+        <span>Map Deck</span>
+        <strong>CDHW Severity</strong>
+      </div>
+
+      <label class="field">
+        <span>Variable</span>
+        <select id="variable-select"></select>
+      </label>
+
+      <label class="field date-field">
+        <span>Date</span>
+        <input id="date-input" type="date">
+      </label>
+
+      <label class="field range-field">
+        <span>Timeline</span>
+        <input id="time-slider" type="range" min="0" value="0">
+      </label>
+
+      <label class="field speed-field">
+        <span>Speed <strong id="speed-value">5x</strong></span>
+        <input id="speed-slider" type="range" min="1" max="10" step="1" value="5" aria-label="Animation speed">
+      </label>
+
+      <button id="play-button" class="icon-button" type="button" aria-pressed="false" title="Play animation">
+        <span aria-hidden="true">▶</span>
+      </button>
+
+      <button id="download-button" class="icon-button" type="button" title="Download current map">
+        <span aria-hidden="true">↓</span>
+      </button>
+    </section>
+
+    <section class="dashboard-grid">
+      <div class="map-panel" aria-label="Interactive CONUS map">
+        <div id="loading" class="loading">Loading CDHW data...</div>
+        <div id="basemap-layer" class="basemap-layer" aria-hidden="true"></div>
+        <canvas id="map-canvas" width="1120" height="620"></canvas>
+        <div class="map-attribution">Topographic basemap: Esri, USGS, NOAA</div>
+      </div>
+
+      <aside class="side-panel">
+        <section class="panel-block">
+          <h2 id="current-date">-</h2>
+          <p id="current-variable">-</p>
+        </section>
+
+        <section class="panel-block">
+          <h3>Cursor</h3>
+          <dl class="readout">
+            <div><dt>Latitude</dt><dd id="readout-lat">-</dd></div>
+            <div><dt>Longitude</dt><dd id="readout-lon">-</dd></div>
+            <div><dt>Value</dt><dd id="readout-value">-</dd></div>
+          </dl>
+        </section>
+
+        <section class="panel-block">
+          <h3>Current Week</h3>
+          <dl class="readout">
+            <div><dt>Valid cells</dt><dd id="day-valid">-</dd></div>
+            <div><dt>Active cells</dt><dd id="day-active">-</dd></div>
+            <div><dt>Mean</dt><dd id="day-mean">-</dd></div>
+            <div><dt>Max</dt><dd id="day-max">-</dd></div>
+          </dl>
+        </section>
+
+        <section class="panel-block">
+          <h3>Legend</h3>
+          <div id="legend" class="legend"></div>
+        </section>
+      </aside>
+    </section>
+
+    <section class="summary-strip" aria-label="Dataset summary">
+      <div>
+        <span class="summary-label">Period</span>
+        <strong id="summary-period">-</strong>
+      </div>
+      <div>
+        <span class="summary-label">Grid</span>
+        <strong id="summary-grid">-</strong>
+      </div>
+      <div>
+        <span class="summary-label">Top CDHW year</span>
+        <strong id="summary-top-year">-</strong>
+      </div>
+      <div>
+        <span class="summary-label">Source</span>
+        <strong>CONUS_CDHW.nc</strong>
+      </div>
+      <div>
+        <span class="summary-label">Weekly NetCDF</span>
+        <strong><a href="data/CONUS_CDHW_weekly_severity_2018_2020.nc" download>Download</a></strong>
+      </div>
+    </section>
+  </main>
+
+  <script src="assets/app.js?v=5"></script>
+</body>
+</html>
